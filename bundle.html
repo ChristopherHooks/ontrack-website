@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Run Your Dispatch Vault — 8 Dispatch Tools, One $97 Download | OnTrack Dispatch</title>
+<meta name="description" content="The complete dispatch operating toolkit: carrier vetting, rate scripts, rate-con and BOL templates, onboarding packets, trackers, and the new-authority checklist. Eight products, $188 value, $97.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: { primary:'#2563EB', navy:'#1E40AF', brand:'#3B82F6', accent:'#F97316', accentdark:'#EA580C', ink:'#0F172A', mist:'#EFF6FF' },
+    fontFamily: { sans:['"Plus Jakarta Sans"','ui-sans-serif','system-ui','sans-serif'] }
+  }}
+}
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+  :focus-visible{outline:3px solid #2563EB;outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body class="bg-white text-ink font-sans antialiased">
+
+<!-- ================= HEADER (shared across all pages) ================= -->
+<header class="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
+  <nav aria-label="Main" class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <!-- LOGO SLOT: replace the OT mark below with the final logo <img> when ready -->
+    <a href="index.html" class="flex items-center gap-2 cursor-pointer" aria-label="OnTrack Dispatch home">
+      <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-extrabold text-white">OT</span>
+      <span class="text-lg font-extrabold tracking-tight">OnTrack <span class="text-primary">Dispatch</span></span>
+    </a>
+    <div class="hidden items-center gap-6 lg:flex">
+      <a href="index.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Home</a>
+      <a href="dashboard.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Dashboard</a>
+      <a href="eta-calculator.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Free ETA Tool</a>
+      <a href="bundle.html" aria-current="page" class="text-sm font-semibold text-primary">Dispatch Vault</a>
+      <a href="about.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">About</a>
+      <a href="contact.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Contact</a>
+      <a href="https://2327315340655.gumroad.com/l/dispatch-vault" class="cursor-pointer rounded-lg bg-accent px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors duration-200 hover:bg-accentdark">Get the bundle — $97</a>
+    </div>
+    <button id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" class="cursor-pointer rounded-lg p-2 text-slate-700 transition-colors duration-200 hover:bg-mist lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+  <div id="mobileMenu" class="hidden border-t border-gray-200 bg-white px-4 pb-4 pt-2 lg:hidden">
+    <a href="index.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Home</a>
+    <a href="dashboard.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Dashboard</a>
+    <a href="eta-calculator.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Free ETA Tool</a>
+    <a href="bundle.html" aria-current="page" class="block rounded-lg px-3 py-2 text-sm font-semibold text-primary">Dispatch Vault</a>
+    <a href="about.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">About</a>
+    <a href="contact.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Contact</a>
+    <a href="https://2327315340655.gumroad.com/l/dispatch-vault" class="mt-2 block cursor-pointer rounded-lg bg-accent px-3 py-2 text-center text-sm font-bold text-white transition-colors duration-200 hover:bg-accentdark">Get the bundle — $97</a>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HERO ================= -->
+  <section class="bg-mist">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="mb-4 inline-block rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-navy">Eight products · One download · Free updates for life</p>
+        <h1 class="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">Run Your <span class="text-primary">Dispatch Vault</span></h1>
+        <p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
+          The complete system to vet carriers, book better rates, handle the paperwork, and grow your fleet. Not a course — the actual operating toolkit from a working book of freight, fully editable and yours forever.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a href="https://2327315340655.gumroad.com/l/dispatch-vault" class="cursor-pointer rounded-lg bg-accent px-8 py-3.5 text-base font-bold text-white shadow-md transition-colors duration-200 hover:bg-accentdark">Get it on Gumroad — $97</a>
+          <p class="text-sm font-semibold text-slate-600"><span class="text-slate-400 line-through">$188 separately</span> · Instant ZIP download</p>
+        </div>
+        <p class="mx-auto mt-6 max-w-xl rounded-xl border border-orange-200 bg-orange-50 px-4 py-3 text-sm font-semibold leading-relaxed text-slate-700">One bad load — an unscreened net-90 broker, unbilled detention, a double-brokered "great rate" — costs more than this whole Vault.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHAT'S INSIDE ================= -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">What's inside — the full stack</h2>
+      <p class="mt-4 text-lg text-slate-600">Everything opens in Excel, free Google Sheets, or any PDF reader. No TMS, no subscription, no special software.</p>
+    </div>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2">
+      <div class="relative rounded-2xl border-2 border-primary bg-white p-6 shadow-md">
+        <span class="absolute -top-3 left-6 rounded-full bg-primary px-3 py-0.5 text-xs font-bold uppercase tracking-wide text-white">Flagship</span>
+        <div class="flex items-start justify-between gap-4"><h3 class="text-lg font-extrabold">Dispatcher Starter Kit</h3><span class="flex-none rounded-lg bg-mist px-2.5 py-1 text-sm font-bold text-navy">$39 value</span></div>
+        <p class="mt-3 leading-relaxed text-slate-600">The complete SOP: daily workflow, carrier vetting checklist, word-for-word rate-negotiation scripts, broker red flags, and the load-tracking cadence that earns repeat freight.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 transition-shadow duration-200 hover:shadow-lg">
+        <div class="flex items-start justify-between gap-4"><h3 class="text-lg font-extrabold">Load Tracker &amp; Rate Log</h3><span class="flex-none rounded-lg bg-mist px-2.5 py-1 text-sm font-bold text-navy">$9 value</span></div>
+        <p class="mt-3 leading-relaxed text-slate-600">Pre-built spreadsheet with the formulas done: rate-per-mile, detention owed, PODs, broker terms, and a weekly "am I making money" dashboard. Just add your loads.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 transition-shadow duration-200 hover:shadow-lg">
+        <div class="flex items-start justify-between gap-4"><h3 class="text-lg font-extrabold">Rate-Con + BOL Template Pack</h3><span class="flex-none rounded-lg bg-mist px-2.5 py-1 text-sm font-bold text-navy">$19 value</span></div>
+        <p class="mt-3 leading-relaxed text-slate-600">Fill-in-the-blank rate confirmation, BOL, and carrier-broker agreement — the three documents that keep you from getting stiffed.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 transition-shadow duration-200 hover:shadow-lg">
+        <div class="flex items-start justify-between gap-4"><h3 class="text-lg font-extrabold">Carrier Onboarding Packet</h3><span class="flex-none rounded-lg bg-mist px-2.5 py-1 text-sm font-bold text-navy">$29 value</span></div>
+        <p class="mt-3 leading-relaxed text-slate-600">Setup sheet, W-9 request, insurance requirements, dispatch agreement, and remittance form. Onboard a new carrier in ten minutes, not an afternoon.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 transition-shadow duration-200 hover:shadow-lg">
+        <div class="flex items-start justify-between gap-4"><h3 class="text-lg font-extrabold">New Authority Startup Checklist</h3><span class="flex-none rounded-lg bg-mist px-2.5 py-1 text-sm font-bold text-navy">$19 value</span></div>
+        <p class="mt-3 leading-relaxed text-slate-600">Every step for a fresh MC#: BOC-3, UCR, IFTA, insurance filings, factoring setup, first broker packets — in order, nothing missed.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 transition-shadow duration-200 hover:shadow-lg">
+        <div class="flex items-start justify-between gap-4"><h3 class="text-lg font-extrabold">Broker Red-Flags + Fraud-Screen Guide</h3><span class="flex-none rounded-lg bg-mist px-2.5 py-1 text-sm font-bold text-navy">$15 value</span></div>
+        <p class="mt-3 leading-relaxed text-slate-600">The double-broker and fraud playbook plus a 60-second broker screening checklist, so you know when to walk away.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 transition-shadow duration-200 hover:shadow-lg">
+        <div class="flex items-start justify-between gap-4"><h3 class="text-lg font-extrabold">Driver Recruiting &amp; Onboarding Kit</h3><span class="flex-none rounded-lg bg-mist px-2.5 py-1 text-sm font-bold text-navy">$39 value</span></div>
+        <p class="mt-3 leading-relaxed text-slate-600">Job-post templates, screening questions, driver application, orientation and first-week checklists — for when you're growing past what fits in your head.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 transition-shadow duration-200 hover:shadow-lg">
+        <div class="flex items-start justify-between gap-4"><h3 class="text-lg font-extrabold">Lane Rate Cheat-Sheet / RPM Calculator</h3><span class="flex-none rounded-lg bg-mist px-2.5 py-1 text-sm font-bold text-navy">$19 value</span></div>
+        <p class="mt-3 leading-relaxed text-slate-600">Log your lane rates over time and calculate your rate-per-mile break-even, so you know your number before the broker names theirs.</p>
+      </div>
+    </div>
+    <div class="mt-10 rounded-2xl bg-navy p-8 text-center">
+      <p class="text-lg font-bold text-blue-100">Total value: <span class="text-white">$188</span> · Yours today for <span class="text-3xl font-extrabold text-white">$97</span></p>
+      <a href="https://2327315340655.gumroad.com/l/dispatch-vault" class="mt-5 inline-block cursor-pointer rounded-lg bg-accent px-8 py-3.5 text-base font-bold text-white shadow-md transition-colors duration-200 hover:bg-accentdark">Get it on Gumroad</a>
+      <p class="mt-3 text-sm text-blue-200">Instant download · Fully editable · Free updates for life</p>
+    </div>
+  </section>
+
+  <!-- ================= WHO IT'S FOR ================= -->
+  <section class="bg-mist">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-2">
+        <div>
+          <h2 class="text-2xl font-extrabold tracking-tight sm:text-3xl">Who this is for</h2>
+          <ul class="mt-6 space-y-4">
+            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 flex-none text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span class="leading-relaxed text-slate-700"><strong>New or solo dispatchers</strong> who want the whole operating system in one shot instead of learning it the expensive way, load by load.</span></li>
+            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 flex-none text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span class="leading-relaxed text-slate-700"><strong>New owner-operators and fresh-authority holders</strong> standing up a back office from zero — startup checklist, paperwork, and vetting all at once.</span></li>
+            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 flex-none text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span class="leading-relaxed text-slate-700"><strong>Small fleet owners (2–15 trucks)</strong> who need recruiting and onboarding on top of the dispatch core.</span></li>
+            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 flex-none text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span class="leading-relaxed text-slate-700"><strong>Freight-broker newcomers</strong> who need carrier vetting and onboarding packets done right.</span></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-2xl font-extrabold tracking-tight sm:text-3xl">Who it's <span class="text-accentdark">not</span> for</h2>
+          <ul class="mt-6 space-y-4">
+            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 flex-none text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg><span class="leading-relaxed text-slate-700">People looking for a "get rich in trucking" scheme. This is a work-tool, not a money-printing promise.</span></li>
+            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 flex-none text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg><span class="leading-relaxed text-slate-700">Large carriers already running a full TMS with a trained back-office team — you likely have these systems.</span></li>
+            <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-5 w-5 flex-none text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg><span class="leading-relaxed text-slate-700">Anyone unwilling to adapt the templates to their own authority and lanes. These are battle-tested starting points, not a magic button.</span></li>
+          </ul>
+          <div class="mt-8 rounded-2xl border border-blue-200 bg-white p-6">
+            <h3 class="font-extrabold">Not sure it fits?</h3>
+            <p class="mt-2 leading-relaxed text-slate-600">Message before you buy and you'll get an honest answer on whether the Vault suits your situation — or book the <a href="https://2327315340655.gumroad.com/l/consult" class="cursor-pointer font-semibold text-primary transition-colors duration-200 hover:text-navy">free 15-minute dispatch consult</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+    <h2 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl">Questions buyers actually ask</h2>
+    <div class="mt-10 space-y-4">
+      <details class="group rounded-2xl border border-gray-200 p-6">
+        <summary class="flex cursor-pointer items-center justify-between font-bold transition-colors duration-200 hover:text-primary">What format is everything in?<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-none transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></summary>
+        <p class="mt-3 leading-relaxed text-slate-600">Spreadsheets are Excel files that also open in free Google Sheets; guides and checklists are PDFs. If you can open a spreadsheet and a PDF, you're set.</p>
+      </details>
+      <details class="group rounded-2xl border border-gray-200 p-6">
+        <summary class="flex cursor-pointer items-center justify-between font-bold transition-colors duration-200 hover:text-primary">Do I get everything instantly?<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-none transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></summary>
+        <p class="mt-3 leading-relaxed text-slate-600">Yes — one ZIP delivered immediately after purchase, re-downloadable anytime from your Gumroad library. Updates are free for life.</p>
+      </details>
+      <details class="group rounded-2xl border border-gray-200 p-6">
+        <summary class="flex cursor-pointer items-center justify-between font-bold transition-colors duration-200 hover:text-primary">Can I edit the templates?<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-none transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></summary>
+        <p class="mt-3 leading-relaxed text-slate-600">Everything is fully editable. Put your company name, your lanes, and your terms on it and make it yours.</p>
+      </details>
+      <details class="group rounded-2xl border border-gray-200 p-6">
+        <summary class="flex cursor-pointer items-center justify-between font-bold transition-colors duration-200 hover:text-primary">I already bought one of the pieces — do I pay twice?<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-none transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></summary>
+        <p class="mt-3 leading-relaxed text-slate-600">No. Message with your purchase and you'll get a discount code for the difference — you only ever pay the gap up to $97.</p>
+      </details>
+      <details class="group rounded-2xl border border-gray-200 p-6">
+        <summary class="flex cursor-pointer items-center justify-between font-bold transition-colors duration-200 hover:text-primary">Will this guarantee I make more money?<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-none transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></summary>
+        <p class="mt-3 leading-relaxed text-slate-600">No honest product can promise that. What it gives you is the systems — better vetting, better rate language, billed detention, screened brokers, clean paperwork, and a real tracker. What you do with them is on you.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+    <div class="rounded-3xl bg-mist px-6 py-12 text-center sm:px-12">
+      <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Stop leaving money on the table one load at a time</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-600">Eight products, $188 of value, delivered the second you check out. Yours to keep and edit forever.</p>
+      <a href="https://2327315340655.gumroad.com/l/dispatch-vault" class="mt-8 inline-block cursor-pointer rounded-lg bg-accent px-8 py-3.5 text-base font-bold text-white shadow-md transition-colors duration-200 hover:bg-accentdark">Get it on Gumroad — $97</a>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER (shared across all pages) ================= -->
+<footer class="border-t border-gray-200 bg-white">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
+    <div>
+      <a href="index.html" class="flex items-center gap-2 cursor-pointer" aria-label="OnTrack Dispatch home">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-extrabold text-white">OT</span>
+        <span class="text-lg font-extrabold tracking-tight">OnTrack <span class="text-primary">Dispatch</span></span>
+      </a>
+      <p class="mt-3 text-sm leading-relaxed text-slate-600">Software and tools for dispatchers, owner-operators, and small fleets. Built in Oklahoma City from real dispatch experience.</p>
+    </div>
+    <nav aria-label="Products">
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Products</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="dashboard.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">OnTrack Dashboard</a></li>
+        <li><a href="bundle.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Run Your Dispatch Vault</a></li>
+        <li><a href="eta-calculator.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Free ETA Calculator</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Company">
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Company</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="about.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">About the pivot</a></li>
+        <li><a href="contact.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Contact</a></li>
+        <li><a href="https://2327315340655.gumroad.com/l/consult" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Free 15-min consult</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Get in touch</h2>
+      <ul class="mt-3 space-y-2 text-sm font-semibold text-slate-600">
+        <li><a href="mailto:dispatch@ontrackhs.com" class="cursor-pointer transition-colors duration-200 hover:text-primary">dispatch@ontrackhs.com</a></li>
+        <li><a href="tel:+14053000433" class="cursor-pointer transition-colors duration-200 hover:text-primary">(405) 300-0433</a></li>
+        <li>Oklahoma City, OK</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-gray-200 py-6 text-center text-sm text-slate-500">© 2026 OnTrack Dispatch. All rights reserved.</div>
+</footer>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+</script>
+</body>
+</html>

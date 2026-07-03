@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OnTrack Dispatch — Software &amp; Tools for Dispatchers, Owner-Operators &amp; Small Fleets</title>
+<meta name="description" content="OnTrack Dispatch builds software and tools for the dispatch world: the OnTrack Dashboard, the Run Your Dispatch Vault template bundle, and a free truck ETA calculator.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: { primary:'#2563EB', navy:'#1E40AF', brand:'#3B82F6', accent:'#F97316', accentdark:'#EA580C', ink:'#0F172A', mist:'#EFF6FF' },
+    fontFamily: { sans:['"Plus Jakarta Sans"','ui-sans-serif','system-ui','sans-serif'] }
+  }}
+}
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+  :focus-visible{outline:3px solid #2563EB;outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body class="bg-white text-ink font-sans antialiased">
+
+<!-- ================= HEADER (shared across all pages) ================= -->
+<header class="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
+  <nav aria-label="Main" class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <!-- LOGO SLOT: replace the OT mark below with the final logo <img> when ready -->
+    <a href="index.html" class="flex items-center gap-2 cursor-pointer" aria-label="OnTrack Dispatch home">
+      <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-extrabold text-white">OT</span>
+      <span class="text-lg font-extrabold tracking-tight">OnTrack <span class="text-primary">Dispatch</span></span>
+    </a>
+    <div class="hidden items-center gap-6 lg:flex">
+      <a href="index.html" aria-current="page" class="text-sm font-semibold text-primary">Home</a>
+      <a href="dashboard.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Dashboard</a>
+      <a href="eta-calculator.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Free ETA Tool</a>
+      <a href="bundle.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Dispatch Vault</a>
+      <a href="about.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">About</a>
+      <a href="contact.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Contact</a>
+      <a href="dashboard.html" class="cursor-pointer rounded-lg bg-accent px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors duration-200 hover:bg-accentdark">Get the Dashboard</a>
+    </div>
+    <button id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" class="cursor-pointer rounded-lg p-2 text-slate-700 transition-colors duration-200 hover:bg-mist lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+  <div id="mobileMenu" class="hidden border-t border-gray-200 bg-white px-4 pb-4 pt-2 lg:hidden">
+    <a href="index.html" aria-current="page" class="block rounded-lg px-3 py-2 text-sm font-semibold text-primary">Home</a>
+    <a href="dashboard.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Dashboard</a>
+    <a href="eta-calculator.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Free ETA Tool</a>
+    <a href="bundle.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Dispatch Vault</a>
+    <a href="about.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">About</a>
+    <a href="contact.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Contact</a>
+    <a href="dashboard.html" class="mt-2 block cursor-pointer rounded-lg bg-accent px-3 py-2 text-center text-sm font-bold text-white transition-colors duration-200 hover:bg-accentdark">Get the Dashboard</a>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HERO ================= -->
+  <section class="bg-mist">
+    <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-24">
+      <div>
+        <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-navy">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Built by a working dispatch operation
+        </p>
+        <h1 class="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+          Run your dispatch like a business, <span class="text-primary">not a notepad.</span>
+        </h1>
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
+          OnTrack builds software and tools for the people who actually move freight — dispatchers, owner-operators, and small fleets. Track your loads, know your rate-per-mile, keep the paperwork tight, and stop leaving money on the table.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a href="dashboard.html" class="cursor-pointer rounded-lg bg-accent px-6 py-3 text-base font-bold text-white shadow-md transition-colors duration-200 hover:bg-accentdark">Explore the Dashboard</a>
+          <a href="eta-calculator.html" class="cursor-pointer rounded-lg border-2 border-primary bg-white px-6 py-3 text-base font-bold text-primary transition-colors duration-200 hover:bg-blue-50">Try the free ETA tool</a>
+        </div>
+        <p class="mt-4 text-sm text-slate-600">
+          Prefer templates over software? <a href="bundle.html" class="cursor-pointer font-semibold text-primary underline-offset-2 transition-colors duration-200 hover:text-navy hover:underline">Get the Dispatch Vault — $97</a>
+        </p>
+      </div>
+
+      <!-- Stylized product mockup (placeholder until real dashboard screenshots) -->
+      <div aria-hidden="true" class="rounded-2xl border border-blue-100 bg-white p-2 shadow-xl">
+        <div class="flex items-center gap-1.5 border-b border-gray-100 px-3 py-2">
+          <span class="h-2.5 w-2.5 rounded-full bg-red-300"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-green-300"></span>
+          <span class="ml-3 rounded bg-gray-100 px-2 py-0.5 text-[10px] font-semibold text-slate-500">OnTrack Dashboard — This Week</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 p-3">
+          <div class="rounded-lg bg-mist p-3"><p class="text-[10px] font-bold uppercase text-slate-500">Loads booked</p><p class="text-xl font-extrabold text-navy">14</p></div>
+          <div class="rounded-lg bg-mist p-3"><p class="text-[10px] font-bold uppercase text-slate-500">Avg RPM</p><p class="text-xl font-extrabold text-navy">$2.41</p></div>
+          <div class="rounded-lg bg-orange-50 p-3"><p class="text-[10px] font-bold uppercase text-slate-500">Detention owed</p><p class="text-xl font-extrabold text-accentdark">$450</p></div>
+        </div>
+        <div class="px-3 pb-3">
+          <div class="overflow-hidden rounded-lg border border-gray-100">
+            <div class="grid grid-cols-4 gap-2 bg-gray-50 px-3 py-2 text-[10px] font-bold uppercase text-slate-500"><span>Load</span><span>Lane</span><span>Rate</span><span>Status</span></div>
+            <div class="grid grid-cols-4 gap-2 border-t border-gray-100 px-3 py-2 text-[11px] font-semibold text-slate-700"><span>#4821</span><span>OKC → DAL</span><span>$1,150</span><span class="text-green-600">Delivered</span></div>
+            <div class="grid grid-cols-4 gap-2 border-t border-gray-100 px-3 py-2 text-[11px] font-semibold text-slate-700"><span>#4822</span><span>DAL → MEM</span><span>$1,540</span><span class="text-primary">In transit</span></div>
+            <div class="grid grid-cols-4 gap-2 border-t border-gray-100 px-3 py-2 text-[11px] font-semibold text-slate-700"><span>#4823</span><span>MEM → ATL</span><span>$1,275</span><span class="text-slate-500">Booked</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROBLEM ================= -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">The money doesn't leak on the big stuff. It leaks load by load.</h2>
+      <p class="mt-4 text-lg leading-relaxed text-slate-600">
+        Detention you never billed. A broker you didn't screen. A truck that sat all day with no next load lined up. If your operation lives in your head and a notepad, you're paying for it every week — you just can't see where.
+      </p>
+    </div>
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 transition-shadow duration-200 hover:shadow-lg">
+        <span class="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-mist text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </span>
+        <h3 class="mt-4 text-lg font-bold">Unbilled detention</h3>
+        <p class="mt-2 leading-relaxed text-slate-600">No in/out times logged means no detention invoiced. Two hours at a dock, twice a week, adds up to real money you already earned and never collected.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 transition-shadow duration-200 hover:shadow-lg">
+        <span class="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-mist text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        </span>
+        <h3 class="mt-4 text-lg font-bold">Unscreened brokers</h3>
+        <p class="mt-2 leading-relaxed text-slate-600">One net-90 broker or one double-brokered load costs more than a year of the right tools. Vetting takes 60 seconds when you have a system for it.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-6 transition-shadow duration-200 hover:shadow-lg">
+        <span class="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-mist text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </span>
+        <h3 class="mt-4 text-lg font-bold">No real numbers</h3>
+        <p class="mt-2 leading-relaxed text-slate-600">Gross feels fine until you run the rate-per-mile. If you don't know your break-even before the broker names a number, you're negotiating blind.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= THREE OFFERINGS ================= -->
+  <section class="bg-mist">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Three ways to tighten up your operation</h2>
+        <p class="mt-4 text-lg text-slate-600">Software if you want it running for you. Templates if you want to own the files. A free tool either way.</p>
+      </div>
+      <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        <!-- Dashboard (flagship) -->
+        <div class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-lg">
+          <span class="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">Flagship</span>
+          <h3 class="text-xl font-extrabold">OnTrack Dashboard</h3>
+          <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-slate-500">All-in-one dispatch ops</p>
+          <p class="mt-4 flex-1 leading-relaxed text-slate-600">One screen for the whole operation: loads, lanes, rates, drivers, brokers, paperwork, and a weekly "am I actually making money" view. Built for independent dispatchers and small fleets.</p>
+          <a href="dashboard.html" class="mt-6 cursor-pointer rounded-lg bg-accent px-5 py-3 text-center text-sm font-bold text-white transition-colors duration-200 hover:bg-accentdark">See the Dashboard</a>
+        </div>
+        <!-- Free tool -->
+        <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-8 transition-shadow duration-200 hover:shadow-lg">
+          <h3 class="text-xl font-extrabold">Free ETA Calculator</h3>
+          <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-slate-500">No signup. No catch.</p>
+          <p class="mt-4 flex-1 leading-relaxed text-slate-600">Origin to destination with real truck math: HOS-aware drive time, 30-minute breaks, 10-hour resets, and rate-per-mile on the side. Give your customer an ETA you can stand behind.</p>
+          <a href="eta-calculator.html" class="mt-6 cursor-pointer rounded-lg border-2 border-primary px-5 py-3 text-center text-sm font-bold text-primary transition-colors duration-200 hover:bg-blue-50">Run an ETA now</a>
+        </div>
+        <!-- Bundle -->
+        <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-8 transition-shadow duration-200 hover:shadow-lg">
+          <h3 class="text-xl font-extrabold">Run Your Dispatch Vault</h3>
+          <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-slate-500">8 products · one download · $97</p>
+          <p class="mt-4 flex-1 leading-relaxed text-slate-600">The complete operating toolkit: carrier vetting checklists, word-for-word rate scripts, rate-con and BOL templates, onboarding packets, trackers, and the new-authority startup checklist. $188 of value.</p>
+          <a href="bundle.html" class="mt-6 cursor-pointer rounded-lg border-2 border-primary px-5 py-3 text-center text-sm font-bold text-primary transition-colors duration-200 hover:bg-blue-50">What's in the Vault</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMPARISON ================= -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Notepad vs. spreadsheet vs. OnTrack</h2>
+      <p class="mt-4 text-lg text-slate-600">Everybody starts on paper. Here's what changes when you upgrade the system.</p>
+    </div>
+    <div class="mt-10 overflow-x-auto">
+      <table class="w-full min-w-[640px] border-collapse overflow-hidden rounded-2xl text-left text-sm">
+        <caption class="sr-only">Comparison of running dispatch from a notepad, a generic spreadsheet, and OnTrack</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="bg-gray-50 px-5 py-4 font-bold text-slate-600">What you need</th>
+            <th scope="col" class="bg-gray-50 px-5 py-4 font-bold text-slate-600">Notepad &amp; memory</th>
+            <th scope="col" class="bg-gray-50 px-5 py-4 font-bold text-slate-600">Generic spreadsheet</th>
+            <th scope="col" class="bg-blue-600 px-5 py-4 font-extrabold text-white">OnTrack</th>
+          </tr>
+        </thead>
+        <tbody class="text-slate-700">
+          <tr class="border-t border-gray-200">
+            <th scope="row" class="px-5 py-4 font-semibold">Know your true rate-per-mile</th>
+            <td class="px-5 py-4">Gut feel</td>
+            <td class="px-5 py-4">If you build the formulas</td>
+            <td class="bg-mist px-5 py-4 font-bold text-navy">Built in, per load and per week</td>
+          </tr>
+          <tr class="border-t border-gray-200 bg-gray-50/60">
+            <th scope="row" class="px-5 py-4 font-semibold">Catch unbilled detention</th>
+            <td class="px-5 py-4">Rarely</td>
+            <td class="px-5 py-4">Manual, easy to skip</td>
+            <td class="bg-mist px-5 py-4 font-bold text-navy">In/out times logged, owed amount flagged</td>
+          </tr>
+          <tr class="border-t border-gray-200">
+            <th scope="row" class="px-5 py-4 font-semibold">Screen brokers before you commit</th>
+            <td class="px-5 py-4">Phone-a-friend</td>
+            <td class="px-5 py-4">Separate notes, if any</td>
+            <td class="bg-mist px-5 py-4 font-bold text-navy">Broker history &amp; red flags with the load</td>
+          </tr>
+          <tr class="border-t border-gray-200 bg-gray-50/60">
+            <th scope="row" class="px-5 py-4 font-semibold">Paperwork that holds up</th>
+            <td class="px-5 py-4">Whatever the broker sends</td>
+            <td class="px-5 py-4">Scattered files</td>
+            <td class="bg-mist px-5 py-4 font-bold text-navy">Templates + docs tied to each load</td>
+          </tr>
+          <tr class="border-t border-gray-200">
+            <th scope="row" class="px-5 py-4 font-semibold">Weekly profit picture</th>
+            <td class="px-5 py-4">End-of-month surprise</td>
+            <td class="px-5 py-4">DIY dashboard</td>
+            <td class="bg-mist px-5 py-4 font-bold text-navy">One view: gross, net, RPM, per truck</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-8 text-center">
+      <a href="dashboard.html" class="inline-block cursor-pointer rounded-lg bg-accent px-6 py-3 text-base font-bold text-white shadow-md transition-colors duration-200 hover:bg-accentdark">Get on the Dashboard early-access list</a>
+    </div>
+  </section>
+
+  <!-- ================= TRUST / CREDIBILITY ================= -->
+  <section class="bg-navy">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div>
+          <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Built from a real book of freight — not a marketing deck</h2>
+          <p class="mt-4 text-lg leading-relaxed text-blue-100">
+            OnTrack started as a working dispatch operation out of Oklahoma City — vetting carriers, fighting for rates, chasing PODs, billing detention. Every tool here exists because we needed it on an actual load, not because it looked good in a pitch.
+          </p>
+          <a href="about.html" class="mt-6 inline-block cursor-pointer font-bold text-white underline decoration-accent decoration-2 underline-offset-4 transition-colors duration-200 hover:text-blue-200">Read the story →</a>
+        </div>
+        <dl class="grid grid-cols-2 gap-6">
+          <div class="rounded-2xl bg-white/10 p-6"><dt class="text-sm font-semibold text-blue-200">Operating experience</dt><dd class="mt-1 text-2xl font-extrabold text-white">Real dispatch, real lanes</dd></div>
+          <div class="rounded-2xl bg-white/10 p-6"><dt class="text-sm font-semibold text-blue-200">In the Vault</dt><dd class="mt-1 text-2xl font-extrabold text-white">8 tools, $188 value</dd></div>
+          <div class="rounded-2xl bg-white/10 p-6"><dt class="text-sm font-semibold text-blue-200">Vault updates</dt><dd class="mt-1 text-2xl font-extrabold text-white">Free for life</dd></div>
+          <div class="rounded-2xl bg-white/10 p-6"><dt class="text-sm font-semibold text-blue-200">ETA tool</dt><dd class="mt-1 text-2xl font-extrabold text-white">Free, forever</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="rounded-3xl bg-mist px-6 py-12 text-center sm:px-12">
+      <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Stop running your operation out of your head</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-600">Start with the free ETA tool today. Grab the Vault when you're ready to systemize. Get on the Dashboard list to run it all in one place.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="dashboard.html" class="cursor-pointer rounded-lg bg-accent px-6 py-3 text-base font-bold text-white shadow-md transition-colors duration-200 hover:bg-accentdark">OnTrack Dashboard</a>
+        <a href="eta-calculator.html" class="cursor-pointer rounded-lg border-2 border-primary bg-white px-6 py-3 text-base font-bold text-primary transition-colors duration-200 hover:bg-blue-50">Free ETA tool</a>
+        <a href="bundle.html" class="cursor-pointer rounded-lg border-2 border-primary bg-white px-6 py-3 text-base font-bold text-primary transition-colors duration-200 hover:bg-blue-50">Dispatch Vault — $97</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER (shared across all pages) ================= -->
+<footer class="border-t border-gray-200 bg-white">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
+    <div>
+      <a href="index.html" class="flex items-center gap-2 cursor-pointer" aria-label="OnTrack Dispatch home">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-extrabold text-white">OT</span>
+        <span class="text-lg font-extrabold tracking-tight">OnTrack <span class="text-primary">Dispatch</span></span>
+      </a>
+      <p class="mt-3 text-sm leading-relaxed text-slate-600">Software and tools for dispatchers, owner-operators, and small fleets. Built in Oklahoma City from real dispatch experience.</p>
+    </div>
+    <nav aria-label="Products">
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Products</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="dashboard.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">OnTrack Dashboard</a></li>
+        <li><a href="bundle.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Run Your Dispatch Vault</a></li>
+        <li><a href="eta-calculator.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Free ETA Calculator</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Company">
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Company</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="about.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">About the pivot</a></li>
+        <li><a href="contact.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Contact</a></li>
+        <li><a href="https://2327315340655.gumroad.com/l/consult" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Free 15-min consult</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Get in touch</h2>
+      <ul class="mt-3 space-y-2 text-sm font-semibold text-slate-600">
+        <li><a href="mailto:dispatch@ontrackhs.com" class="cursor-pointer transition-colors duration-200 hover:text-primary">dispatch@ontrackhs.com</a></li>
+        <li><a href="tel:+14053000433" class="cursor-pointer transition-colors duration-200 hover:text-primary">(405) 300-0433</a></li>
+        <li>Oklahoma City, OK</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-gray-200 py-6 text-center text-sm text-slate-500">© 2026 OnTrack Dispatch. All rights reserved.</div>
+</footer>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+</script>
+</body>
+</html>

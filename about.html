@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — From Running Dispatch to Building Tools for Dispatchers | OnTrack Dispatch</title>
+<meta name="description" content="OnTrack started as a working dispatch operation in Oklahoma City. Now we build the software and tools we wished we'd had — for dispatchers, owner-operators, and small fleets.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: { primary:'#2563EB', navy:'#1E40AF', brand:'#3B82F6', accent:'#F97316', accentdark:'#EA580C', ink:'#0F172A', mist:'#EFF6FF' },
+    fontFamily: { sans:['"Plus Jakarta Sans"','ui-sans-serif','system-ui','sans-serif'] }
+  }}
+}
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+  :focus-visible{outline:3px solid #2563EB;outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body class="bg-white text-ink font-sans antialiased">
+
+<!-- ================= HEADER (shared across all pages) ================= -->
+<header class="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
+  <nav aria-label="Main" class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <!-- LOGO SLOT: replace the OT mark below with the final logo <img> when ready -->
+    <a href="index.html" class="flex items-center gap-2 cursor-pointer" aria-label="OnTrack Dispatch home">
+      <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-extrabold text-white">OT</span>
+      <span class="text-lg font-extrabold tracking-tight">OnTrack <span class="text-primary">Dispatch</span></span>
+    </a>
+    <div class="hidden items-center gap-6 lg:flex">
+      <a href="index.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Home</a>
+      <a href="dashboard.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Dashboard</a>
+      <a href="eta-calculator.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Free ETA Tool</a>
+      <a href="bundle.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Dispatch Vault</a>
+      <a href="about.html" aria-current="page" class="text-sm font-semibold text-primary">About</a>
+      <a href="contact.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Contact</a>
+      <a href="dashboard.html" class="cursor-pointer rounded-lg bg-accent px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors duration-200 hover:bg-accentdark">Get the Dashboard</a>
+    </div>
+    <button id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" class="cursor-pointer rounded-lg p-2 text-slate-700 transition-colors duration-200 hover:bg-mist lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+  <div id="mobileMenu" class="hidden border-t border-gray-200 bg-white px-4 pb-4 pt-2 lg:hidden">
+    <a href="index.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Home</a>
+    <a href="dashboard.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Dashboard</a>
+    <a href="eta-calculator.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Free ETA Tool</a>
+    <a href="bundle.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Dispatch Vault</a>
+    <a href="about.html" aria-current="page" class="block rounded-lg px-3 py-2 text-sm font-semibold text-primary">About</a>
+    <a href="contact.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Contact</a>
+    <a href="dashboard.html" class="mt-2 block cursor-pointer rounded-lg bg-accent px-3 py-2 text-center text-sm font-bold text-white transition-colors duration-200 hover:bg-accentdark">Get the Dashboard</a>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HERO ================= -->
+  <section class="bg-mist">
+    <div class="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-24">
+      <p class="mb-4 inline-block rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-navy">Oklahoma City, OK</p>
+      <h1 class="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">We used to book the loads. <span class="text-primary">Now we build the tools.</span></h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">OnTrack Hauling Solutions ran dispatch for owner-operators — real lanes, real brokers, real 5am phone calls. That operation became OnTrack Dispatch: software and tools for the people still on those phones.</p>
+    </div>
+  </section>
+
+  <!-- ================= STORY ================= -->
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-extrabold tracking-tight">The pivot, honestly</h2>
+    <div class="mt-6 space-y-5 text-lg leading-relaxed text-slate-700">
+      <p>
+        OnTrack started the way most dispatch outfits do: one desk, a phone, and a handful of owner-operators trusting us to keep their trucks loaded. We vetted the brokers, fought for the rates, chased the PODs, billed the detention, and built the carrier packets — over and over, for every truck, every week.
+      </p>
+      <p>
+        Somewhere in there a pattern showed up. The difference between a good week and a bad one was almost never effort. It was <em>systems</em>. The weeks we logged in/out times, we collected detention. The loads we screened brokers on, we got paid on time. When we knew our break-even rate-per-mile before picking up the phone, we negotiated from strength instead of hope.
+      </p>
+      <p>
+        So we built our own tooling — trackers, checklists, scripts, packets, and eventually a dashboard — because nothing on the market fit a one-desk operation. The big TMS platforms were built for carriers with back offices. We were the back office.
+      </p>
+      <p>
+        In 2026 we made the call: stop booking loads and put everything into the tools. Not because dispatch didn't work — but because the systems we built were helping other dispatchers more than any single booked load ever could. OnTrack Hauling Solutions became <strong>OnTrack Dispatch</strong>: same operation, same standards, different product.
+      </p>
+      <p>
+        To be clear about what that means: <strong>we no longer offer dispatch services or book loads.</strong> If you need a dispatcher, we're not it — but our tools will make whoever you hire (or the dispatcher you become) sharper.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= WHAT WE BELIEVE ================= -->
+  <section class="bg-mist">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <h2 class="text-center text-3xl font-extrabold tracking-tight sm:text-4xl">What we build by</h2>
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl bg-white p-8 shadow-sm">
+          <h3 class="text-lg font-extrabold text-navy">Tools, not promises</h3>
+          <p class="mt-3 leading-relaxed text-slate-600">No "six figures from your couch" pitch. Vetting checklists, rate math, and paperwork that holds up — the unglamorous stuff that actually moves the number.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-8 shadow-sm">
+          <h3 class="text-lg font-extrabold text-navy">Built at the desk, not in a deck</h3>
+          <p class="mt-3 leading-relaxed text-slate-600">Every template in the Vault and every screen in the Dashboard exists because a real load needed it. If we wouldn't have used it at 5am, it doesn't ship.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-8 shadow-sm">
+          <h3 class="text-lg font-extrabold text-navy">Priced for one-desk operations</h3>
+          <p class="mt-3 leading-relaxed text-slate-600">The Vault costs less than one bad load. The Dashboard will never require a sales call to learn the price. Free tools stay free.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="rounded-3xl bg-navy px-6 py-12 text-center sm:px-12">
+      <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">See what came out of the desk</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-lg text-blue-100">The dashboard we built for ourselves, the templates we ran on, and a free ETA tool to start with.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="dashboard.html" class="cursor-pointer rounded-lg bg-accent px-6 py-3 text-base font-bold text-white shadow-md transition-colors duration-200 hover:bg-accentdark">OnTrack Dashboard</a>
+        <a href="bundle.html" class="cursor-pointer rounded-lg border-2 border-white px-6 py-3 text-base font-bold text-white transition-colors duration-200 hover:bg-white/10">Dispatch Vault — $97</a>
+        <a href="eta-calculator.html" class="cursor-pointer rounded-lg border-2 border-white px-6 py-3 text-base font-bold text-white transition-colors duration-200 hover:bg-white/10">Free ETA tool</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER (shared across all pages) ================= -->
+<footer class="border-t border-gray-200 bg-white">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
+    <div>
+      <a href="index.html" class="flex items-center gap-2 cursor-pointer" aria-label="OnTrack Dispatch home">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-extrabold text-white">OT</span>
+        <span class="text-lg font-extrabold tracking-tight">OnTrack <span class="text-primary">Dispatch</span></span>
+      </a>
+      <p class="mt-3 text-sm leading-relaxed text-slate-600">Software and tools for dispatchers, owner-operators, and small fleets. Built in Oklahoma City from real dispatch experience.</p>
+    </div>
+    <nav aria-label="Products">
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Products</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="dashboard.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">OnTrack Dashboard</a></li>
+        <li><a href="bundle.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Run Your Dispatch Vault</a></li>
+        <li><a href="eta-calculator.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Free ETA Calculator</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Company">
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Company</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="about.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">About the pivot</a></li>
+        <li><a href="contact.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Contact</a></li>
+        <li><a href="https://2327315340655.gumroad.com/l/consult" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Free 15-min consult</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Get in touch</h2>
+      <ul class="mt-3 space-y-2 text-sm font-semibold text-slate-600">
+        <li><a href="mailto:dispatch@ontrackhs.com" class="cursor-pointer transition-colors duration-200 hover:text-primary">dispatch@ontrackhs.com</a></li>
+        <li><a href="tel:+14053000433" class="cursor-pointer transition-colors duration-200 hover:text-primary">(405) 300-0433</a></li>
+        <li>Oklahoma City, OK</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-gray-200 py-6 text-center text-sm text-slate-500">© 2026 OnTrack Dispatch. All rights reserved.</div>
+</footer>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Truck ETA Calculator — HOS-Aware Route Planner | OnTrack Dispatch</title>
+<meta name="description" content="Free truck ETA calculator with real dispatch math: route distance, HOS-aware drive time, 30-minute breaks, 10-hour resets, and rate-per-mile. No signup required.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: { primary:'#2563EB', navy:'#1E40AF', brand:'#3B82F6', accent:'#F97316', accentdark:'#EA580C', ink:'#0F172A', mist:'#EFF6FF' },
+    fontFamily: { sans:['"Plus Jakarta Sans"','ui-sans-serif','system-ui','sans-serif'] }
+  }}
+}
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+  :focus-visible{outline:3px solid #2563EB;outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body class="bg-white text-ink font-sans antialiased">
+
+<!-- ================= HEADER (shared across all pages) ================= -->
+<header class="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
+  <nav aria-label="Main" class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <!-- LOGO SLOT: replace the OT mark below with the final logo <img> when ready -->
+    <a href="index.html" class="flex items-center gap-2 cursor-pointer" aria-label="OnTrack Dispatch home">
+      <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-extrabold text-white">OT</span>
+      <span class="text-lg font-extrabold tracking-tight">OnTrack <span class="text-primary">Dispatch</span></span>
+    </a>
+    <div class="hidden items-center gap-6 lg:flex">
+      <a href="index.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Home</a>
+      <a href="dashboard.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Dashboard</a>
+      <a href="eta-calculator.html" aria-current="page" class="text-sm font-semibold text-primary">Free ETA Tool</a>
+      <a href="bundle.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Dispatch Vault</a>
+      <a href="about.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">About</a>
+      <a href="contact.html" class="text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Contact</a>
+      <a href="dashboard.html" class="cursor-pointer rounded-lg bg-accent px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors duration-200 hover:bg-accentdark">Get the Dashboard</a>
+    </div>
+    <button id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" class="cursor-pointer rounded-lg p-2 text-slate-700 transition-colors duration-200 hover:bg-mist lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+  <div id="mobileMenu" class="hidden border-t border-gray-200 bg-white px-4 pb-4 pt-2 lg:hidden">
+    <a href="index.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Home</a>
+    <a href="dashboard.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Dashboard</a>
+    <a href="eta-calculator.html" aria-current="page" class="block rounded-lg px-3 py-2 text-sm font-semibold text-primary">Free ETA Tool</a>
+    <a href="bundle.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Dispatch Vault</a>
+    <a href="about.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">About</a>
+    <a href="contact.html" class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-mist hover:text-primary">Contact</a>
+    <a href="dashboard.html" class="mt-2 block cursor-pointer rounded-lg bg-accent px-3 py-2 text-center text-sm font-bold text-white transition-colors duration-200 hover:bg-accentdark">Get the Dashboard</a>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HERO + TOOL ================= -->
+  <section class="bg-mist">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="mb-4 inline-block rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-navy">Free · No signup · No catch</p>
+        <h1 class="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">Truck ETA calculator that knows the <span class="text-primary">HOS clock</span></h1>
+        <p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
+          Car GPS apps don't drive 11-hour clocks. This does. Enter the lane, get route miles, real drive time with 30-minute breaks and 10-hour resets, and an ETA you can give a broker with a straight face.
+        </p>
+      </div>
+
+      <!-- ============ THE TOOL ============ -->
+      <div class="mx-auto mt-12 max-w-5xl">
+        <form id="etaForm" class="rounded-3xl border border-blue-100 bg-white p-6 shadow-xl sm:p-8" novalidate>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="origin" class="block text-sm font-bold text-ink">Origin</label>
+              <input id="origin" name="origin" type="text" placeholder="Oklahoma City, OK" autocomplete="off"
+                class="mt-1.5 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-base transition-colors duration-200 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-200">
+            </div>
+            <div>
+              <label for="destination" class="block text-sm font-bold text-ink">Destination</label>
+              <input id="destination" name="destination" type="text" placeholder="Atlanta, GA" autocomplete="off"
+                class="mt-1.5 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-base transition-colors duration-200 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-200">
+            </div>
+            <div>
+              <label for="departure" class="block text-sm font-bold text-ink">Departure (pickup) time</label>
+              <input id="departure" name="departure" type="datetime-local"
+                class="mt-1.5 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-base transition-colors duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-200">
+            </div>
+            <div>
+              <label for="avgSpeed" class="block text-sm font-bold text-ink">Average road speed (mph)</label>
+              <input id="avgSpeed" name="avgSpeed" type="number" value="55" min="30" max="70" inputmode="numeric"
+                class="mt-1.5 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-base transition-colors duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-200">
+              <p class="mt-1 text-xs text-slate-500">55 is honest all-in average for most OTR lanes. Bump to 58–60 for open interstate.</p>
+            </div>
+            <div>
+              <label for="manualMiles" class="block text-sm font-bold text-ink">Miles <span class="font-normal text-slate-500">(optional — overrides lookup)</span></label>
+              <input id="manualMiles" name="manualMiles" type="number" min="1" max="4000" placeholder="Auto from route lookup" inputmode="numeric"
+                class="mt-1.5 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-base transition-colors duration-200 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-200">
+            </div>
+            <div>
+              <label for="rate" class="block text-sm font-bold text-ink">Load rate ($) <span class="font-normal text-slate-500">(optional — shows RPM)</span></label>
+              <input id="rate" name="rate" type="number" min="0" placeholder="e.g. 2450" inputmode="numeric"
+                class="mt-1.5 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-base transition-colors duration-200 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-200">
+            </div>
+          </div>
+          <fieldset class="mt-5">
+            <legend class="text-sm font-bold text-ink">Hours of Service</legend>
+            <div class="mt-2 flex flex-wrap gap-4">
+              <label class="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-semibold transition-colors duration-200 hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-mist">
+                <input type="radio" name="hosMode" value="solo" checked class="h-4 w-4 cursor-pointer accent-blue-600">
+                Solo driver (11-hr driving / 14-hr window / 10-hr reset)
+              </label>
+              <label class="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-semibold transition-colors duration-200 hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-mist">
+                <input type="radio" name="hosMode" value="team" class="h-4 w-4 cursor-pointer accent-blue-600">
+                Team (truck keeps rolling)
+              </label>
+              <label class="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-semibold transition-colors duration-200 hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-mist">
+                <input type="radio" name="hosMode" value="none" class="h-4 w-4 cursor-pointer accent-blue-600">
+                No HOS (straight drive time)
+              </label>
+            </div>
+          </fieldset>
+          <button id="calcBtn" type="submit"
+            class="mt-6 w-full cursor-pointer rounded-lg bg-accent px-6 py-3.5 text-base font-bold text-white shadow-md transition-colors duration-200 hover:bg-accentdark disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">
+            Calculate ETA
+          </button>
+          <p id="formError" role="alert" class="mt-3 hidden text-sm font-semibold text-red-600"></p>
+        </form>
+
+        <!-- Results -->
+        <div id="results" class="mt-8 hidden" aria-live="polite">
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="rounded-2xl border border-gray-200 bg-white p-5"><p class="text-xs font-bold uppercase tracking-wide text-slate-500">Route distance</p><p id="rMiles" class="mt-1 text-2xl font-extrabold text-navy">—</p><p id="rMilesNote" class="mt-1 text-xs text-slate-500"></p></div>
+            <div class="rounded-2xl border border-gray-200 bg-white p-5"><p class="text-xs font-bold uppercase tracking-wide text-slate-500">Driving time</p><p id="rDrive" class="mt-1 text-2xl font-extrabold text-navy">—</p><p id="rDriveNote" class="mt-1 text-xs text-slate-500"></p></div>
+            <div class="rounded-2xl border border-gray-200 bg-white p-5"><p class="text-xs font-bold uppercase tracking-wide text-slate-500">Off-duty time added</p><p id="rBreaks" class="mt-1 text-2xl font-extrabold text-navy">—</p><p id="rBreaksNote" class="mt-1 text-xs text-slate-500"></p></div>
+            <div class="rounded-2xl border-2 border-primary bg-mist p-5"><p class="text-xs font-bold uppercase tracking-wide text-navy">Estimated arrival</p><p id="rEta" class="mt-1 text-2xl font-extrabold text-navy">—</p><p id="rRpm" class="mt-1 text-xs font-bold text-accentdark"></p></div>
+          </div>
+          <div id="timeline" class="mt-6 rounded-2xl border border-gray-200 bg-white p-6">
+            <h2 class="text-lg font-extrabold">Trip plan</h2>
+            <ol id="timelineList" class="mt-4 space-y-3"></ol>
+            <p class="mt-4 border-t border-gray-100 pt-4 text-xs leading-relaxed text-slate-500">
+              Planning estimate only. Assumes departure with a fresh clock; doesn't account for traffic, weather, dock delays, or your specific remaining hours. Verify against the driver's actual ELD before you commit a delivery window.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">The math, out in the open</h2>
+      <p class="mt-4 text-lg text-slate-600">No black box. This is the same arithmetic a good dispatcher runs in their head — just faster and without the 2am mistakes.</p>
+    </div>
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <div class="rounded-2xl border border-gray-200 p-6">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-mist text-sm font-extrabold text-primary">1</span>
+        <h3 class="mt-4 text-lg font-bold">Route miles</h3>
+        <p class="mt-2 leading-relaxed text-slate-600">We pull real road miles from OpenStreetMap routing. If the lookup can't find your points, type the miles in yourself and the rest still works.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 p-6">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-mist text-sm font-extrabold text-primary">2</span>
+        <h3 class="mt-4 text-lg font-bold">Honest drive time</h3>
+        <p class="mt-2 leading-relaxed text-slate-600">Miles ÷ your real average speed — fuel stops, scale houses, and city crawl included in that 55, not ignored like a car GPS does.</p>
+      </div>
+      <div class="rounded-2xl border border-gray-200 p-6">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-mist text-sm font-extrabold text-primary">3</span>
+        <h3 class="mt-4 text-lg font-bold">HOS on top</h3>
+        <p class="mt-2 leading-relaxed text-slate-600">A 30-minute break after 8 hours driving, a 10-hour reset after 11 — stacked onto the clock the way the ELD will actually force it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= UPSELL ================= -->
+  <section class="bg-mist">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="rounded-3xl bg-white p-8 shadow-sm sm:p-12">
+        <div class="grid items-center gap-8 lg:grid-cols-2">
+          <div>
+            <h2 class="text-3xl font-extrabold tracking-tight">Like the free tool? The paid stuff hits harder.</h2>
+            <p class="mt-4 text-lg leading-relaxed text-slate-600">The ETA calculator is one piece of a working dispatch system. The <strong>OnTrack Dashboard</strong> runs the whole operation, and the <strong>Dispatch Vault</strong> gives you every template and checklist we use — $97, yours forever.</p>
+          </div>
+          <div class="flex flex-col gap-4 sm:flex-row lg:justify-end">
+            <a href="dashboard.html" class="cursor-pointer rounded-lg bg-accent px-6 py-3 text-center text-base font-bold text-white shadow-md transition-colors duration-200 hover:bg-accentdark">See the Dashboard</a>
+            <a href="bundle.html" class="cursor-pointer rounded-lg border-2 border-primary px-6 py-3 text-center text-base font-bold text-primary transition-colors duration-200 hover:bg-blue-50">Get the Vault — $97</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER (shared across all pages) ================= -->
+<footer class="border-t border-gray-200 bg-white">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
+    <div>
+      <a href="index.html" class="flex items-center gap-2 cursor-pointer" aria-label="OnTrack Dispatch home">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-extrabold text-white">OT</span>
+        <span class="text-lg font-extrabold tracking-tight">OnTrack <span class="text-primary">Dispatch</span></span>
+      </a>
+      <p class="mt-3 text-sm leading-relaxed text-slate-600">Software and tools for dispatchers, owner-operators, and small fleets. Built in Oklahoma City from real dispatch experience.</p>
+    </div>
+    <nav aria-label="Products">
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Products</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="dashboard.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">OnTrack Dashboard</a></li>
+        <li><a href="bundle.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Run Your Dispatch Vault</a></li>
+        <li><a href="eta-calculator.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Free ETA Calculator</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Company">
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Company</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="about.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">About the pivot</a></li>
+        <li><a href="contact.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Contact</a></li>
+        <li><a href="https://2327315340655.gumroad.com/l/consult" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Free 15-min consult</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Get in touch</h2>
+      <ul class="mt-3 space-y-2 text-sm font-semibold text-slate-600">
+        <li><a href="mailto:dispatch@ontrackhs.com" class="cursor-pointer transition-colors duration-200 hover:text-primary">dispatch@ontrackhs.com</a></li>
+        <li><a href="tel:+14053000433" class="cursor-pointer transition-colors duration-200 hover:text-primary">(405) 300-0433</a></li>
+        <li>Oklahoma City, OK</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-gray-200 py-6 text-center text-sm text-slate-500">© 2026 OnTrack Dispatch. All rights reserved.</div>
+</footer>
+
+<script>
+  // Mobile menu
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+
+  // ===== ETA Calculator =====
+  const form = document.getElementById('etaForm');
+  const calcBtn = document.getElementById('calcBtn');
+  const errEl = document.getElementById('formError');
+
+  // Default departure = next half hour
+  (function initDeparture(){
+    const d = new Date();
+    d.setMinutes(d.getMinutes() + (30 - d.getMinutes() % 30), 0, 0);
+    const pad = n => String(n).padStart(2,'0');
+    document.getElementById('departure').value =
+      `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  })();
+
+  function showError(msg){ errEl.textContent = msg; errEl.classList.remove('hidden'); }
+  function clearError(){ errEl.classList.add('hidden'); }
+
+  async function geocode(q){
+    const url = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=us,ca,mx&q=' + encodeURIComponent(q);
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if(!res.ok) throw new Error('geocode');
+    const data = await res.json();
+    if(!data.length) throw new Error('notfound:' + q);
+    return { lat: data[0].lat, lon: data[0].lon, name: data[0].display_name.split(',').slice(0,2).join(',') };
+  }
+
+  async function routeMiles(a, b){
+    const url = `https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=false`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('route');
+    const data = await res.json();
+    if(data.code !== 'Ok' || !data.routes?.length) throw new Error('route');
+    return data.routes[0].distance / 1609.344;
+  }
+
+  function fmtHrs(h){
+    const hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+    return mm ? `${hh}h ${mm}m` : `${hh}h`;
+  }
+  function fmtDate(d){
+    return d.toLocaleString([], { weekday:'short', month:'short', day:'numeric', hour:'numeric', minute:'2-digit' });
+  }
+
+  // HOS plan: 11h driving per shift, 30-min break after 8h driving, 10h reset between shifts
+  function buildPlan(miles, mph, depart, mode){
+    const totalDrive = miles / mph;
+    const events = [];
+    let clock = new Date(depart);
+    let remaining = totalDrive;
+    let offDuty = 0;
+    events.push({ t:new Date(clock), label:'Depart origin', sub:`${Math.round(miles).toLocaleString()} mi ahead · ${fmtHrs(totalDrive)} driving at ${mph} mph` });
+
+    if(mode === 'none' || mode === 'team'){
+      clock = new Date(clock.getTime() + totalDrive*3600e3);
+      events.push({ t:new Date(clock), label:'Arrive destination', sub: mode==='team' ? 'Team operation — truck keeps rolling' : 'Straight drive time, no HOS applied' });
+      return { events, offDuty, eta: clock };
+    }
+
+    let shiftDrive = 0, sinceBreak = 0;
+    while(remaining > 0.001){
+      const toBreak = 8 - sinceBreak;
+      const toShiftEnd = 11 - shiftDrive;
+      const leg = Math.min(remaining, toBreak, toShiftEnd);
+      clock = new Date(clock.getTime() + leg*3600e3);
+      remaining -= leg; shiftDrive += leg; sinceBreak += leg;
+      if(remaining <= 0.001) break;
+      if(shiftDrive >= 11 - 1e-9){
+        events.push({ t:new Date(clock), label:'10-hour reset', sub:`11 hrs driving used · ${fmtHrs(remaining)} still to go` });
+        clock = new Date(clock.getTime() + 10*3600e3);
+        offDuty += 10; shiftDrive = 0; sinceBreak = 0;
+      } else if(sinceBreak >= 8 - 1e-9){
+        events.push({ t:new Date(clock), label:'30-minute break', sub:'Required after 8 hrs driving' });
+        clock = new Date(clock.getTime() + 0.5*3600e3);
+        offDuty += 0.5; sinceBreak = 0;
+      }
+    }
+    events.push({ t:new Date(clock), label:'Arrive destination', sub:'Fresh-clock estimate — check the driver\'s actual ELD' });
+    return { events, offDuty, eta: clock };
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearError();
+    const origin = document.getElementById('origin').value.trim();
+    const destination = document.getElementById('destination').value.trim();
+    const manualMiles = parseFloat(document.getElementById('manualMiles').value);
+    const mph = Math.min(70, Math.max(30, parseFloat(document.getElementById('avgSpeed').value) || 55));
+    const departVal = document.getElementById('departure').value;
+    const rate = parseFloat(document.getElementById('rate').value);
+    const mode = form.querySelector('input[name="hosMode"]:checked').value;
+
+    if(!departVal){ showError('Pick a departure time.'); return; }
+    const depart = new Date(departVal);
+
+    let miles = null, milesNote = '';
+    calcBtn.disabled = true; calcBtn.textContent = 'Calculating…';
+    try {
+      if(!isNaN(manualMiles) && manualMiles > 0){
+        miles = manualMiles; milesNote = 'Manual entry';
+      } else {
+        if(!origin || !destination){ showError('Enter an origin and destination, or type the miles manually.'); return; }
+        try {
+          const [a, b] = [await geocode(origin), await geocode(destination)];
+          miles = await routeMiles(a, b);
+          milesNote = `${a.name} → ${b.name} · OpenStreetMap route`;
+        } catch(err){
+          showError(String(err.message).startsWith('notfound')
+            ? `Couldn't find "${String(err.message).split(':')[1]}" — try "City, ST" format, or enter miles manually.`
+            : 'Route lookup is unavailable right now — enter the miles manually and we\'ll do the rest.');
+          return;
+        }
+      }
+
+      const plan = buildPlan(miles, mph, depart, mode);
+      document.getElementById('rMiles').textContent = Math.round(miles).toLocaleString() + ' mi';
+      document.getElementById('rMilesNote').textContent = milesNote;
+      document.getElementById('rDrive').textContent = fmtHrs(miles / mph);
+      document.getElementById('rDriveNote').textContent = `at ${mph} mph average`;
+      document.getElementById('rBreaks').textContent = fmtHrs(plan.offDuty);
+      document.getElementById('rBreaksNote').textContent = mode === 'solo' ? 'breaks + resets' : 'none applied';
+      document.getElementById('rEta').textContent = fmtDate(plan.eta);
+      document.getElementById('rRpm').textContent = (!isNaN(rate) && rate > 0) ? `$${(rate/miles).toFixed(2)} per mile` : '';
+
+      const list = document.getElementById('timelineList');
+      list.innerHTML = '';
+      plan.events.forEach(ev => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start gap-3';
+        li.innerHTML = `<span class="mt-1.5 h-2.5 w-2.5 flex-none rounded-full ${ev.label.includes('Arrive') ? 'bg-orange-500' : ev.label.includes('Depart') ? 'bg-blue-600' : 'bg-slate-300'}"></span>
+          <div><p class="font-bold text-ink">${ev.label} <span class="font-semibold text-slate-500">· ${fmtDate(ev.t)}</span></p>
+          <p class="text-sm text-slate-600">${ev.sub}</p></div>`;
+        list.appendChild(li);
+      });
+      document.getElementById('results').classList.remove('hidden');
+      document.getElementById('results').scrollIntoView({ behavior:'smooth', block:'nearest' });
+    } finally {
+      calcBtn.disabled = false; calcBtn.textContent = 'Calculate ETA';
+    }
+  });
+</script>
+</body>
+</html>
