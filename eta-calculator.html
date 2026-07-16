@@ -12,7 +12,7 @@
 <script>
 tailwind.config = {
   theme: { extend: {
-    colors: { primary:'#2563EB', navy:'#1E40AF', brand:'#3B82F6', accent:'#F97316', accentdark:'#EA580C', ink:'#0F172A', mist:'#EFF6FF' },
+    colors: { primary:'#2563EB', navy:'#1E40AF', brand:'#3B82F6', accent:'#C2410C', accentdark:'#9A3412', ink:'#0F172A', mist:'#EFF6FF' },
     fontFamily: { sans:['"Plus Jakarta Sans"','ui-sans-serif','system-ui','sans-serif'] }
   }}
 }
@@ -95,15 +95,15 @@ tailwind.config = {
               <label for="avgSpeed" class="block text-sm font-bold text-ink">Average road speed (mph)</label>
               <input id="avgSpeed" name="avgSpeed" type="number" value="55" min="30" max="70" inputmode="numeric"
                 class="mt-1.5 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-base transition-colors duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-200">
-              <p class="mt-1 text-xs text-slate-500">55 is honest all-in average for most OTR lanes. Bump to 58–60 for open interstate.</p>
+              <p class="mt-1 text-xs text-slate-600">55 is honest all-in average for most OTR lanes. Bump to 58–60 for open interstate.</p>
             </div>
             <div>
-              <label for="manualMiles" class="block text-sm font-bold text-ink">Miles <span class="font-normal text-slate-500">(optional — overrides lookup)</span></label>
+              <label for="manualMiles" class="block text-sm font-bold text-ink">Miles <span class="font-normal text-slate-600">(optional — overrides lookup)</span></label>
               <input id="manualMiles" name="manualMiles" type="number" min="1" max="4000" placeholder="Auto from route lookup" inputmode="numeric"
                 class="mt-1.5 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-base transition-colors duration-200 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-200">
             </div>
             <div>
-              <label for="rate" class="block text-sm font-bold text-ink">Load rate ($) <span class="font-normal text-slate-500">(optional — shows RPM)</span></label>
+              <label for="rate" class="block text-sm font-bold text-ink">Load rate ($) <span class="font-normal text-slate-600">(optional — shows RPM)</span></label>
               <input id="rate" name="rate" type="number" min="0" placeholder="e.g. 2450" inputmode="numeric"
                 class="mt-1.5 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-base transition-colors duration-200 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-200">
             </div>
@@ -135,15 +135,15 @@ tailwind.config = {
         <!-- Results -->
         <div id="results" class="mt-8 hidden" aria-live="polite">
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <div class="rounded-2xl border border-gray-200 bg-white p-5"><p class="text-xs font-bold uppercase tracking-wide text-slate-500">Route distance</p><p id="rMiles" class="mt-1 text-2xl font-extrabold text-navy">—</p><p id="rMilesNote" class="mt-1 text-xs text-slate-500"></p></div>
-            <div class="rounded-2xl border border-gray-200 bg-white p-5"><p class="text-xs font-bold uppercase tracking-wide text-slate-500">Driving time</p><p id="rDrive" class="mt-1 text-2xl font-extrabold text-navy">—</p><p id="rDriveNote" class="mt-1 text-xs text-slate-500"></p></div>
-            <div class="rounded-2xl border border-gray-200 bg-white p-5"><p class="text-xs font-bold uppercase tracking-wide text-slate-500">Off-duty time added</p><p id="rBreaks" class="mt-1 text-2xl font-extrabold text-navy">—</p><p id="rBreaksNote" class="mt-1 text-xs text-slate-500"></p></div>
+            <div class="rounded-2xl border border-gray-200 bg-white p-5"><p class="text-xs font-bold uppercase tracking-wide text-slate-600">Route distance</p><p id="rMiles" class="mt-1 text-2xl font-extrabold text-navy">—</p><p id="rMilesNote" class="mt-1 text-xs text-slate-600"></p></div>
+            <div class="rounded-2xl border border-gray-200 bg-white p-5"><p class="text-xs font-bold uppercase tracking-wide text-slate-600">Driving time</p><p id="rDrive" class="mt-1 text-2xl font-extrabold text-navy">—</p><p id="rDriveNote" class="mt-1 text-xs text-slate-600"></p></div>
+            <div class="rounded-2xl border border-gray-200 bg-white p-5"><p class="text-xs font-bold uppercase tracking-wide text-slate-600">Off-duty time added</p><p id="rBreaks" class="mt-1 text-2xl font-extrabold text-navy">—</p><p id="rBreaksNote" class="mt-1 text-xs text-slate-600"></p></div>
             <div class="rounded-2xl border-2 border-primary bg-mist p-5"><p class="text-xs font-bold uppercase tracking-wide text-navy">Estimated arrival</p><p id="rEta" class="mt-1 text-2xl font-extrabold text-navy">—</p><p id="rRpm" class="mt-1 text-xs font-bold text-accentdark"></p></div>
           </div>
           <div id="timeline" class="mt-6 rounded-2xl border border-gray-200 bg-white p-6">
             <h2 class="text-lg font-extrabold">Trip plan</h2>
             <ol id="timelineList" class="mt-4 space-y-3"></ol>
-            <p class="mt-4 border-t border-gray-100 pt-4 text-xs leading-relaxed text-slate-500">
+            <p class="mt-4 border-t border-gray-100 pt-4 text-xs leading-relaxed text-slate-600">
               Planning estimate only. Assumes departure with a fresh clock; doesn't account for traffic, weather, dock delays, or your specific remaining hours. Verify against the driver's actual ELD before you commit a delivery window.
             </p>
           </div>
@@ -207,7 +207,7 @@ tailwind.config = {
       <p class="mt-3 text-sm leading-relaxed text-slate-600">Software and tools for dispatchers, owner-operators, and small fleets. Built in Oklahoma City from real dispatch experience.</p>
     </div>
     <nav aria-label="Products">
-      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Products</h2>
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-600">Products</h2>
       <ul class="mt-3 space-y-2 text-sm">
         <li><a href="dashboard.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">OnTrack Dashboard</a></li>
         <li><a href="bundle.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Run Your Dispatch Vault</a></li>
@@ -215,7 +215,7 @@ tailwind.config = {
       </ul>
     </nav>
     <nav aria-label="Company">
-      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Company</h2>
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-600">Company</h2>
       <ul class="mt-3 space-y-2 text-sm">
         <li><a href="about.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">About the pivot</a></li>
         <li><a href="contact.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Contact</a></li>
@@ -223,7 +223,7 @@ tailwind.config = {
       </ul>
     </nav>
     <div>
-      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Get in touch</h2>
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-600">Get in touch</h2>
       <ul class="mt-3 space-y-2 text-sm font-semibold text-slate-600">
         <li><a href="mailto:dispatch@ontrackhs.com" class="cursor-pointer transition-colors duration-200 hover:text-primary">dispatch@ontrackhs.com</a></li>
         <li><a href="tel:+14053000433" class="cursor-pointer transition-colors duration-200 hover:text-primary">(405) 300-0433</a></li>
@@ -231,7 +231,7 @@ tailwind.config = {
       </ul>
     </div>
   </div>
-  <div class="border-t border-gray-200 py-6 text-center text-sm text-slate-500">© 2026 OnTrack Dispatch. All rights reserved.</div>
+  <div class="border-t border-gray-200 py-6 text-center text-sm text-slate-600">© 2026 OnTrack Dispatch. All rights reserved.</div>
 </footer>
 
 <script>
@@ -373,7 +373,7 @@ tailwind.config = {
         const li = document.createElement('li');
         li.className = 'flex items-start gap-3';
         li.innerHTML = `<span class="mt-1.5 h-2.5 w-2.5 flex-none rounded-full ${ev.label.includes('Arrive') ? 'bg-orange-500' : ev.label.includes('Depart') ? 'bg-blue-600' : 'bg-slate-300'}"></span>
-          <div><p class="font-bold text-ink">${ev.label} <span class="font-semibold text-slate-500">· ${fmtDate(ev.t)}</span></p>
+          <div><p class="font-bold text-ink">${ev.label} <span class="font-semibold text-slate-600">· ${fmtDate(ev.t)}</span></p>
           <p class="text-sm text-slate-600">${ev.sub}</p></div>`;
         list.appendChild(li);
       });

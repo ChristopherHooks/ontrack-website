@@ -12,7 +12,7 @@
 <script>
 tailwind.config = {
   theme: { extend: {
-    colors: { primary:'#2563EB', navy:'#1E40AF', brand:'#3B82F6', accent:'#F97316', accentdark:'#EA580C', ink:'#0F172A', mist:'#EFF6FF' },
+    colors: { primary:'#2563EB', navy:'#1E40AF', brand:'#3B82F6', accent:'#C2410C', accentdark:'#9A3412', ink:'#0F172A', mist:'#EFF6FF' },
     fontFamily: { sans:['"Plus Jakarta Sans"','ui-sans-serif','system-ui','sans-serif'] }
   }}
 }
@@ -90,19 +90,19 @@ tailwind.config = {
           <span class="h-2.5 w-2.5 rounded-full bg-red-300"></span>
           <span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span>
           <span class="h-2.5 w-2.5 rounded-full bg-green-300"></span>
-          <span class="ml-3 rounded bg-gray-100 px-2 py-0.5 text-[10px] font-semibold text-slate-500">OnTrack Dashboard — This Week</span>
+          <span class="ml-3 rounded bg-gray-100 px-2 py-0.5 text-[10px] font-semibold text-slate-600">OnTrack Dashboard — This Week</span>
         </div>
         <div class="grid grid-cols-3 gap-2 p-3">
-          <div class="rounded-lg bg-mist p-3"><p class="text-[10px] font-bold uppercase text-slate-500">Loads booked</p><p class="text-xl font-extrabold text-navy">14</p></div>
-          <div class="rounded-lg bg-mist p-3"><p class="text-[10px] font-bold uppercase text-slate-500">Avg RPM</p><p class="text-xl font-extrabold text-navy">$2.41</p></div>
-          <div class="rounded-lg bg-orange-50 p-3"><p class="text-[10px] font-bold uppercase text-slate-500">Detention owed</p><p class="text-xl font-extrabold text-accentdark">$450</p></div>
+          <div class="rounded-lg bg-mist p-3"><p class="text-[10px] font-bold uppercase text-slate-600">Loads booked</p><p class="text-xl font-extrabold text-navy">14</p></div>
+          <div class="rounded-lg bg-mist p-3"><p class="text-[10px] font-bold uppercase text-slate-600">Avg RPM</p><p class="text-xl font-extrabold text-navy">$2.41</p></div>
+          <div class="rounded-lg bg-orange-50 p-3"><p class="text-[10px] font-bold uppercase text-slate-600">Detention owed</p><p class="text-xl font-extrabold text-accentdark">$450</p></div>
         </div>
         <div class="px-3 pb-3">
           <div class="overflow-hidden rounded-lg border border-gray-100">
-            <div class="grid grid-cols-4 gap-2 bg-gray-50 px-3 py-2 text-[10px] font-bold uppercase text-slate-500"><span>Load</span><span>Lane</span><span>Rate</span><span>Status</span></div>
-            <div class="grid grid-cols-4 gap-2 border-t border-gray-100 px-3 py-2 text-[11px] font-semibold text-slate-700"><span>#4821</span><span>OKC → DAL</span><span>$1,150</span><span class="text-green-600">Delivered</span></div>
+            <div class="grid grid-cols-4 gap-2 bg-gray-50 px-3 py-2 text-[10px] font-bold uppercase text-slate-600"><span>Load</span><span>Lane</span><span>Rate</span><span>Status</span></div>
+            <div class="grid grid-cols-4 gap-2 border-t border-gray-100 px-3 py-2 text-[11px] font-semibold text-slate-700"><span>#4821</span><span>OKC → DAL</span><span>$1,150</span><span class="text-green-700">Delivered</span></div>
             <div class="grid grid-cols-4 gap-2 border-t border-gray-100 px-3 py-2 text-[11px] font-semibold text-slate-700"><span>#4822</span><span>DAL → MEM</span><span>$1,540</span><span class="text-primary">In transit</span></div>
-            <div class="grid grid-cols-4 gap-2 border-t border-gray-100 px-3 py-2 text-[11px] font-semibold text-slate-700"><span>#4823</span><span>MEM → ATL</span><span>$1,275</span><span class="text-slate-500">Booked</span></div>
+            <div class="grid grid-cols-4 gap-2 border-t border-gray-100 px-3 py-2 text-[11px] font-semibold text-slate-700"><span>#4823</span><span>MEM → ATL</span><span>$1,275</span><span class="text-slate-600">Booked</span></div>
           </div>
         </div>
       </div>
@@ -154,21 +154,21 @@ tailwind.config = {
         <div class="relative flex flex-col rounded-2xl border-2 border-primary bg-white p-8 shadow-lg">
           <span class="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">Flagship</span>
           <h3 class="text-xl font-extrabold">OnTrack Dashboard</h3>
-          <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-slate-500">All-in-one dispatch ops</p>
+          <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-slate-600">All-in-one dispatch ops</p>
           <p class="mt-4 flex-1 leading-relaxed text-slate-600">One screen for the whole operation: loads, lanes, rates, drivers, brokers, paperwork, and a weekly "am I actually making money" view. Built for independent dispatchers and small fleets.</p>
           <a href="dashboard.html" class="mt-6 cursor-pointer rounded-lg bg-accent px-5 py-3 text-center text-sm font-bold text-white transition-colors duration-200 hover:bg-accentdark">See the Dashboard</a>
         </div>
         <!-- Free tool -->
         <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-8 transition-shadow duration-200 hover:shadow-lg">
           <h3 class="text-xl font-extrabold">Free ETA Calculator</h3>
-          <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-slate-500">No signup. No catch.</p>
+          <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-slate-600">No signup. No catch.</p>
           <p class="mt-4 flex-1 leading-relaxed text-slate-600">Origin to destination with real truck math: HOS-aware drive time, 30-minute breaks, 10-hour resets, and rate-per-mile on the side. Give your customer an ETA you can stand behind.</p>
           <a href="eta-calculator.html" class="mt-6 cursor-pointer rounded-lg border-2 border-primary px-5 py-3 text-center text-sm font-bold text-primary transition-colors duration-200 hover:bg-blue-50">Run an ETA now</a>
         </div>
         <!-- Bundle -->
         <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-8 transition-shadow duration-200 hover:shadow-lg">
           <h3 class="text-xl font-extrabold">Run Your Dispatch Vault</h3>
-          <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-slate-500">8 products · one download · $97</p>
+          <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-slate-600">8 products · one download · $97</p>
           <p class="mt-4 flex-1 leading-relaxed text-slate-600">The complete operating toolkit: carrier vetting checklists, word-for-word rate scripts, rate-con and BOL templates, onboarding packets, trackers, and the new-authority startup checklist. $188 of value.</p>
           <a href="bundle.html" class="mt-6 cursor-pointer rounded-lg border-2 border-primary px-5 py-3 text-center text-sm font-bold text-primary transition-colors duration-200 hover:bg-blue-50">What's in the Vault</a>
         </div>
@@ -278,7 +278,7 @@ tailwind.config = {
       <p class="mt-3 text-sm leading-relaxed text-slate-600">Software and tools for dispatchers, owner-operators, and small fleets. Built in Oklahoma City from real dispatch experience.</p>
     </div>
     <nav aria-label="Products">
-      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Products</h2>
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-600">Products</h2>
       <ul class="mt-3 space-y-2 text-sm">
         <li><a href="dashboard.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">OnTrack Dashboard</a></li>
         <li><a href="bundle.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Run Your Dispatch Vault</a></li>
@@ -286,7 +286,7 @@ tailwind.config = {
       </ul>
     </nav>
     <nav aria-label="Company">
-      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Company</h2>
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-600">Company</h2>
       <ul class="mt-3 space-y-2 text-sm">
         <li><a href="about.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">About the pivot</a></li>
         <li><a href="contact.html" class="cursor-pointer font-semibold text-slate-600 transition-colors duration-200 hover:text-primary">Contact</a></li>
@@ -294,7 +294,7 @@ tailwind.config = {
       </ul>
     </nav>
     <div>
-      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Get in touch</h2>
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-600">Get in touch</h2>
       <ul class="mt-3 space-y-2 text-sm font-semibold text-slate-600">
         <li><a href="mailto:dispatch@ontrackhs.com" class="cursor-pointer transition-colors duration-200 hover:text-primary">dispatch@ontrackhs.com</a></li>
         <li><a href="tel:+14053000433" class="cursor-pointer transition-colors duration-200 hover:text-primary">(405) 300-0433</a></li>
@@ -302,7 +302,7 @@ tailwind.config = {
       </ul>
     </div>
   </div>
-  <div class="border-t border-gray-200 py-6 text-center text-sm text-slate-500">© 2026 OnTrack Dispatch. All rights reserved.</div>
+  <div class="border-t border-gray-200 py-6 text-center text-sm text-slate-600">© 2026 OnTrack Dispatch. All rights reserved.</div>
 </footer>
 
 <script>
