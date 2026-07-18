@@ -54,5 +54,5 @@ Squarespace can't host multi-page raw HTML sites cleanly. Options, best to worst
 2. **Dashboard screenshots** — the mockups on `index.html` and `dashboard.html` are labeled illustrative; swap in real product shots when ready.
 3. **Dashboard pricing & purchase** — nothing is set up yet. Recommendation: run early access via the email CTA now (already built), and when ready to charge, use a **Gumroad membership product** for the subscription — you already have Gumroad, it handles cards/tax, zero new infrastructure. Then replace the early-access card with a real pricing table.
 4. **Confirm the contact email** — the site uses `dispatch@ontrackhs.com` per your spec; your current address is `dispatch@ontrackhaulingsolutions.com`. Make sure `ontrackhs.com` mail actually routes to you (or tell me to swap it).
-5. **Gumroad URLs** — currently pointing at `2327315340655.gumroad.com/l/dispatch-vault` and `/l/consult`. Consider setting a custom Gumroad username so links read `ontrackdispatch.gumroad.com/...`.
+5. **Gumroad URLs** — currently pointing at `shop.ontrackhaulingsolutions.com/l/dispatch-vault` and `/l/consult`. Consider setting a custom Gumroad username so links read `ontrackdispatch.gumroad.com/...`.
 6. **Domain decision** — `ontrackhs.com` vs a new `ontrackdispatch.com`; brand on the site is "OnTrack Dispatch" per your approval.
